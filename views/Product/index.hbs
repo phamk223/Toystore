@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+  <title>Products List</title>
+</head>
+<body>
+
+    {{#if message}}
+    <div class="alert alert-info">{{message}}</div>
+{{/if}}
+  <div class="container mt-5">
+    <h1>Products List</h1>
+    
+    <a href="/product/add" class="btn btn-primary mb-3">Add New Product</a>
+    
+    <table class="table table-bordered">
+      <thead class="table-light">
+        <tr>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Image</th>
+          <th>Category</th>
+          <th>Details</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each products}}
+          <tr>
+            <td>{{this.name}}</td>
+            <td>{{this.price}}</td>
+            <td><img src="{{this.imageUrl}}" alt="{{this.title}}" width="50"></td>
+            <td>{{this.category.name}}</td>
+            <td>
+              <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#productModal" 
+                      data-title="{{this.name}}" 
+                      data-price="{{this.price}}" 
+                      data-image01="{{this.imageUrl}}"
+                      
+                      data-category="{{this.category.name}}"
+                      data-colors="{{this.description}}"
+                      data-size="{{this.stock}}">
+                Detail
+              </button>
+            </td>
+            <td>
+              <a href="/product/edit/{{this._id}}" class="btn btn-warning">Edit</a>
+             <form action="product/delete/{{this._id}}" method="POST" style="display:inline;" onsubmit="return confirmDelete();">
+    <button type="submit" class="btn btn-danger">Delete</button>
+</form>
+            </td>
+          </tr>
+        {{else}}
+          <tr>
+            <td colspan="6" class="text-center">No products found.</td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="productModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="productModalLabel">Product Details</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p><strong>Title:</strong> <span id="modalTitle"></span></p>
+          <p><strong>Price:</strong> $<span id="modalPrice"></span></p>
+          <p><strong>Image 1:</strong> <img id="modalImage01" width="50"></p>
+          
+          <p><strong>Category:</strong> <span id="modalCategory"></span></p>
+          <p><strong>Description</strong> <span id="modalColors"></span></p>
+          <p><strong>Stock:</strong> <span id="modalSize"></span></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+  
+  <script>
+    // Lắng nghe sự kiện khi mở modal
+    $('#productModal').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget); // Lấy nút kích hoạt modal
+      var title = button.data('title'); // Lấy dữ liệu từ nút
+      var price = button.data('price');
+      var image01 = button.data('image01');
+      var image02 = button.data('image02');
+      var category = button.data('category');
+      var colors = button.data('colors');
+      var size = button.data('size');
+
+      // Cập nhật nội dung modal
+      var modal = $(this);
+      modal.find('#modalTitle').text(title);
+      modal.find('#modalPrice').text(price);
+      modal.find('#modalImage01').attr('src', image01);
+      modal.find('#modalImage02').attr('src', image02);
+      modal.find('#modalCategory').text(category);
+      modal.find('#modalColors').text(colors);
+      modal.find('#modalSize').text(size);
+    });
+
+
+    function confirmDelete() {
+    return confirm('Are you sure you want to delete this product?');
+}
+  </script>
+</body>
+</html>

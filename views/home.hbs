@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Image</title>
+    <style>
+        .image-container {
+            width: 100%; /* Chiều rộng khung hình tùy thuộc vào nhu cầu */
+            height: auto; /* Để tự động điều chỉnh chiều cao */
+            overflow: hidden; /* Ẩn phần hình ảnh vượt quá khung hình */
+        }
+        
+        .image-container img {
+            width: 100%; /* Kích thước hình ảnh bằng với chiều rộng của khung hình */
+            height: auto; /* Để giữ tỷ lệ khung hình của hình ảnh */
+            object-fit: cover; /* Làm cho hình ảnh lấp đầy khung hình mà không bị biến dạng */
+        }
+    </style>
+</head>
+<body>
+    <div class="image-container">
+        <img src="https://www.mykingdom.com.vn/cdn/shop/files/1._1280x496_12edac68-8e19-495e-92c6-18cc9d7db665.jpg?v=1723516578&width=1200" alt="Responsive image">
+    </div>
+</body>
+</html>
+    <!-- Hero Section End -->
+
+    <!-- Product Section Begin -->
+    <section class="product spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <ul class="filter__controls">
+                        <li class="active" data-filter="*">Best Sellers</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row product__filter">
+				     {{#each randomProducts}}
+       <div class="col-lg-4 col-md-6 col-sm-6">
+                            <div class="product__item">
+                                <div class="product__item__pic set-bg" data-setbg="{{this.imageUrl}}">
+                                  <img class="img-fluid" src="{{this.imageUrl}}" alt="">
+                                </div>
+                                <div class="product__item__text">
+                                    <h6>{{this.name}}</h6>  
+                                    <h5><a href="/productdetail/{{this._id}}" class="link-title">${{this.price}}</a></h5>
+                                    
+                                </div>
+                            </div>
+         </div>
+      {{/each}}
+			</div>
+        </div>
+    </section>
+    <!-- Product Section End -->
+
+ 

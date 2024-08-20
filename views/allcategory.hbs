@@ -1,0 +1,20 @@
+<section class="section gallery">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center mb-5">
+        <h1 class="font-weight-bold">All Category</h1>
+      </div>
+              {{#each categories}}
+      <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+        <div class="block">
+          
+        </div>
+        <div class="product-info">
+        <h4 class="mb-2"><a href="/categorydetail/{{this._id}}" class="link-title">{{this.name}}</a></h4>
+          </p>
+        </div>
+      </div>
+                {{/each}}
+      </div>
+  </div>
+</section>
