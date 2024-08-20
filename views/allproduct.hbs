@@ -6,17 +6,16 @@
       </div>
       {{#each products}}
        <div class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="{{this.imageUrl}}">
-                                  <img class="img-fluid" src="{{this.imageUrl}}" alt="">
-                                </div>
-                                <div class="product__item__text">
-                                    <h6>{{this.name}}</h6>  
-                                    <h5><a href="/productdetail/{{this._id}}" class="link-title">${{this.price}}</a></h5>
-                                    
-                                </div>
-                            </div>
-         </div>
+          <div class="product__item">
+            <div class="product__item__pic">
+              <img class="img-fluid product-image" src="{{this.imageUrl}}" alt="{{this.name}}">
+            </div>
+            <div class="product__item__text">
+              <h6>{{this.name}}</h6>  
+              <h5><a href="/productdetail/{{this._id}}" class="link-title">${{this.price}}</a></h5>
+            </div>
+          </div>
+       </div>
       {{/each}}
     </div>
   </div>
